@@ -3,11 +3,13 @@
 import { useEffect, useRef } from 'react'
 
 export default function YandexInstantAuth() {
-  const widgetRef = useRef<HTMLDivElement>(null)
+  const widgetRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (typeof window !== 'undefined' && (window as any).YaAuthSuggest) {
-      (window as any).YaAuthSuggest.init(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(window as any).YaAuthSuggest.init(
         {
           client_id: process.env.NEXT_PUBLIC_YANDEX_CLIENT_ID,
           response_type: 'token',
@@ -19,11 +21,14 @@ export default function YandexInstantAuth() {
           parentId: widgetRef.current?.id || 'yandex-auth-widget',
         }
       )
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .then(({ handler }: any) => handler())
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .then((data: any) => {
           // Здесь data содержит токен и профиль пользователя
           console.log('Яндекс токен:', data)
         })
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .catch((error: any) => {
           console.error('Ошибка Яндекс авторизации', error)
         })

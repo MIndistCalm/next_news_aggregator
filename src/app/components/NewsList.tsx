@@ -16,6 +16,7 @@ export default function NewsList({ articles, fetchNextPage, hasNextPage, isFetch
 
   useEffect(() => {
     if (!hasNextPage || !fetchNextPage) return
+    const node = loaderRef.current
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -24,12 +25,12 @@ export default function NewsList({ articles, fetchNextPage, hasNextPage, isFetch
       },
       { threshold: 1 }
     )
-    if (loaderRef.current) {
-      observer.observe(loaderRef.current)
+    if (node) {
+      observer.observe(node)
     }
     return () => {
-      if (loaderRef.current) {
-        observer.unobserve(loaderRef.current)
+      if (node) {
+        observer.unobserve(node)
       }
     }
   }, [hasNextPage, fetchNextPage])
