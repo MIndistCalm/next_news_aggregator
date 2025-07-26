@@ -1,12 +1,15 @@
 {
   "name": "next_news_aggregator",
   "version": "0.1.0",
+  "homepage": "https://mindistcalm.github.io/next_news_aggregator",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "predeploy": "next build && next export",
+    "deploy": "gh-pages -d out --nojekyll",
     "format": "prettier --write ."
   },
   "dependencies": {
@@ -25,6 +28,7 @@
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.4.3",
+    "gh-pages": "^6.3.0",
     "prettier": "^3.6.2",
     "tailwindcss": "^4",
     "typescript": "^5"
